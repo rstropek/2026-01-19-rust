@@ -43,5 +43,4 @@ fn main() {
         let n = rng.random_range(1..=100);
         numbers.push(n);    
     }
-    
 }
