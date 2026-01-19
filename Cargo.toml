@@ -1,5 +1,6 @@
 [workspace]
 resolver = "3"
 members = [
-    "expressions-as-statements"
+    "expressions-as-statements",
+    "playground"
 ]
