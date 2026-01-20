@@ -1,7 +1,14 @@
 [workspace]
 resolver = "3"
 members = [
-    "expressions-as-statements", 
-    "more-about-vars", "ownership-borrowing", "ownership-borrowing-advanced", "structures-basics",
-    "shaddowing"
-, "lifetimes", "enum", "account-sample", "playground"]
+    "expressions-as-statements",
+    "more-about-vars",
+    "ownership-borrowing",
+    "ownership-borrowing-advanced",
+    "structures-basics",
+    "shaddowing",
+    "lifetimes",
+    "enum",
+    "account-sample",
+    "traits",
+]

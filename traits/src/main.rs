@@ -175,4 +175,8 @@ fn main() {
         }),
         Box::new(15.0)
     ];
+
+    let something = [billables[0].as_ref()];
+
+
 }
