@@ -1,4 +1,4 @@
-use crate::account_management::{Accounts, Transaction};
+use crate::account_management::{Accounts, transactions::Transaction};
 
 mod account_management;
 

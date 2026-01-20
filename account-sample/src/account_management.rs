@@ -64,9 +64,9 @@ impl Accounts {
         self.open_account(account_number, 0.0);
     }
 
-    pub fn apply_transaction(&mut self, transaction: Transaction) {
+    pub fn apply_transaction(&mut self, transaction: transactions::Transaction) {
         match transaction {
-            Transaction::CashDeposit {
+            transactions::Transaction::CashDeposit {
                 target_account,
                 amount,
             } => {
@@ -90,7 +90,7 @@ impl Accounts {
                     }
                 }
             }
-            Transaction::Transfer {
+            transactions::Transaction::Transfer {
                 source_account,
                 target_account,
                 amount,
@@ -125,15 +125,17 @@ impl Accounts {
     }
 }
 
-pub enum Transaction {
-    CashDeposit {
-        target_account: u32,
-        amount: f32,
-    },
-    #[allow(dead_code)]
-    Transfer {
-        source_account: u32,
-        target_account: u32,
-        amount: f32,
-    },
+pub mod transactions {
+    pub enum Transaction {
+        CashDeposit {
+            target_account: u32,
+            amount: f32,
+        },
+        #[allow(dead_code)]
+        Transfer {
+            source_account: u32,
+            target_account: u32,
+            amount: f32,
+        },
+    }
 }
