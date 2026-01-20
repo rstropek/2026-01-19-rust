@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 // Structures
 struct WallClock {
     hour: u8,
@@ -27,6 +29,8 @@ impl WallClock {
     }
 }
 
+mod clocks;
+
 fn main() {
     let clock = WallClock { hour: 10, minute: 30 }; // clock lives on the stack
     println!("WallClock - Hour: {}, Minute: {}", clock.hour, clock.minute);
@@ -42,8 +46,6 @@ fn main() {
     println!("WallClock (Heap) - Hour: {}, Minute: {}", heap_clock.hour, heap_clock.minute);
 
     // Use the "constructor"
-    let mut constructed_clock = WallClock::new(8, 20);
-    println!("Constructed WallClock - Hour: {}, Minute: {}", constructed_clock.hour, constructed_clock.minute);
-
+    let mut constructed_clock = clocks::WallClock::new(8, 20);
     constructed_clock.add_minutes(50);
 }
