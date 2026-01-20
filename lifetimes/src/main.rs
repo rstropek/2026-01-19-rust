@@ -5,6 +5,7 @@ struct Customer {
     name: String,
 }
 
+
 struct Order<'a> {
     order_id: u32,
     customer: &'a Customer,
