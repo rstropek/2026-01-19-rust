@@ -2,6 +2,6 @@
 resolver = "3"
 members = [
     "expressions-as-statements", 
-    "more-about-vars", "ownership-borrowing", "ownership-borrowing-advanced", "playground",
+    "more-about-vars", "ownership-borrowing", "ownership-borrowing-advanced", "structures-basics",
     "shaddowing"
-]
+, "playground"]
