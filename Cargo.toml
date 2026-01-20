@@ -4,4 +4,4 @@ members = [
     "expressions-as-statements", 
     "more-about-vars", "ownership-borrowing", "ownership-borrowing-advanced", "structures-basics",
     "shaddowing"
-, "playground"]
+, "lifetimes", "playground"]
