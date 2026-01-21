@@ -11,4 +11,6 @@ members = [
     "enum",
     "account-sample",
     "traits",
+    "generator",
+    "playground",
 ]
