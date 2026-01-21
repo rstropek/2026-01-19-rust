@@ -1,6 +1,7 @@
-use serde_json::Value;
-use tokio::{fs::File, io::AsyncReadExt};
 use anyhow::Result;
+use serde_json::Value;
+use thiserror::Error;
+use tokio::{fs::File, io::AsyncReadExt};
 
 async fn read_and_parse(file_name: &str) -> String {
     let mut f = File::open(file_name).await.unwrap();
@@ -41,13 +42,44 @@ async fn read_and_parse_3(file_name: &str) -> Result<String> {
     }
 }
 
+#[derive(Error, Debug)]
+enum ConfigurationReaderError {
+    #[error("I/O error")]
+    Io(#[from] std::io::Error),
+    #[error("UTF-8 conversion error")]
+    Utf8(#[from] std::string::FromUtf8Error),
+    #[error("JSON parsing error")]
+    Json(#[from] serde_json::Error),
+    #[error("Unknown error")]
+    Unknown,
+}
+
+async fn read_and_parse_4(file_name: &str) -> Result<String, ConfigurationReaderError> {
+    let mut f = File::open(file_name).await?;
+    let mut buf = Vec::new();
+    f.read_buf(&mut buf).await?;
+    let s = String::from_utf8(buf)?;
+    let v: Value = serde_json::from_str(&s)?;
+    let connection_string = v.get("connectionString");
+    match connection_string {
+        Some(cs) => Ok(cs.to_string()),
+        None => Err(ConfigurationReaderError::Unknown),
+    }
+}
+
 #[tokio::main]
 async fn main() {
-    let result = read_and_parse_3("settings.json").await;
+    let result = read_and_parse_4("settings.json").await;
     match result {
         Ok(connection_string) => println!("Connection string: {}", connection_string),
         Err(e) => {
-            eprintln!("Error: {}", e);
+            println!("Error occurred: {}", e);
+            match e {
+                ConfigurationReaderError::Io(_) => println!("I/O error occurred"),
+                ConfigurationReaderError::Utf8(_) => println!("UTF-8 conversion error occurred"),
+                ConfigurationReaderError::Json(_) => println!("JSON parsing error occurred"),
+                ConfigurationReaderError::Unknown => println!("Unknown error occurred"),
+            }
         }
     }
 }
