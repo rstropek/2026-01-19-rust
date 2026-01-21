@@ -44,7 +44,7 @@ async fn read_and_parse_3(file_name: &str) -> Result<String> {
 
 #[derive(Error, Debug)]
 enum ConfigurationReaderError {
-    #[error("I/O error")]
+    #[error("I/O error (details: {0})")]
     Io(#[from] std::io::Error),
     #[error("UTF-8 conversion error")]
     Utf8(#[from] std::string::FromUtf8Error),
