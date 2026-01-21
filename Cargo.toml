@@ -14,5 +14,6 @@ members = [
     "generator",
     "iterators",
     "error-handling",
+    "rc-refcell",
     "playground",
 ]
